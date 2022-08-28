@@ -2,32 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="/js/library/jquery/v3.6.0/jquery-3.6.0.js"></script>
     <script src="/js/common/common.js"></script>
-    <script src="/js/memo/memo.js"></script>
+    <script src="/js/memo/memoinsert.js"></script>
     <title>Title</title>
 </head>
 <body>
 <h1>게시글 저장</h1>
-<form id="newMemoData">
+
 <table>
     <tr>
         <td>
-        제목: <input name="memoTitle" type="text">
+        제목: <input id="memoTitle" type="text">
         </td>
     </tr>
     <tr>
         <td>
-        내용: <input name="memoContent" type="text">
+        내용: <input id="memoContent" type="text">
         </td>
     </tr>
     <tr>
         <td>
-        작성자: <input name="memoWriter" type="text">
+        작성자: <input id="memoWriter" type="text">
         </td>
     </tr>
 </table>
-    <button type="submit" id="btnSaveMemo">저장</button>
-</form>
+    <button type="button" id="btnSaveMemo">저장</button>
 
 </body>
 </html>

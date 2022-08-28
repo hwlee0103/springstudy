@@ -15,6 +15,7 @@ public class MemoService {
 
     @Autowired
     public MemoService(MemoRepository memoRepository) {
+
         this.memoRepository = memoRepository;
     }
 
@@ -25,6 +26,7 @@ public class MemoService {
      * @return
      */
     public List<MemoEntity> findAll(){
+
         return this.memoRepository.findAll();
     }
 

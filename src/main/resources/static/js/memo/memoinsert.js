@@ -21,12 +21,13 @@ var main = (function() {
         // 초기 이벤트 바인딩
         //---------------------------------------------------------------------------------------------------------
         init : function(){
-           // TODO sample
-		   bind.eventBind();
-		   bind.dataBind();
+            // TODO sample
+            bind.eventBind();
+            bind.dataBind();
         }
     }
 }());
+
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 //바인딩 함수 정의 부분
@@ -37,43 +38,18 @@ var bind = (function() {
         // sample 이벤트 바인딩
         //---------------------------------------------------------------------------------------------------------
         eventBind : function(){
-			// TODO sample 이벤트 바인딩
+            // TODO sample 이벤트 바인딩
             event.clickAddName();
         },
-        
+
         //---------------------------------------------------------------------------------------------------------
         // sample 데이터 바인딩
         //---------------------------------------------------------------------------------------------------------
         dataBind : function(){
-			var _params = {};
-		   
-            __COMMON.ajax.ajaxLoad("/memo/listdata", _params, function (p_data) {
-				// response 데이터
-				var _result = p_data.result;
-				// response total count
-                // var _totalCount = __COMMON.utils.isNull(p_data.totalCount, "number");
-				
-				var _html = [];
-                // sample null 체크
-				if(p_data.result != null){
-                    for(var rowNum in _result){
-						var _obj = _result[rowNum];
-						var _memoSeq = "<td>" + __COMMON.utils.isNull(_obj.memoSeq, "string") + "</td>"
-						var _memoTitle = __COMMON.utils.isNull(_obj.memoTitle, "string")
-						var _memoContent = __COMMON.utils.isNull(_obj.memoContent, "number")
-						_html.push("<tr>"
-                            +"</tr>");
-					}
-					jQuery("#tbody").html(_html.join(""));
-                }else{
-					// sample no date
-                    alert("데이터가 존재하지 않습니다.");
-                }
+            var _params = {};
 
-            }, false //동기/비동기
-			, jQuery("#btn") );
         },
-		
+
     }
 }());
 
@@ -91,6 +67,7 @@ var process = (function() {
     }
 }());
 
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 //이벤트
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,17 +77,15 @@ var event = (function() {
         // sample 클릭 추가 이벤트
         //---------------------------------------------------------------------------------------------------------
         clickAddName : function(){
-            // jQuery("#btnAddName").off("click.add").on("click.add", function(){
-            //     // TODO add
-            // });
             jQuery("#btnSaveMemo").off("click.add").on("click", function(){
                 // TODO saveMemo ajax
-                // 선택자 ?
-                let param = new FormData($("#newMemoData"));
+                // 선택자
+                var param = new Object();
+                param.memoTitle = $("#memoTitle").val();
+                param.memoContent = $("#memoContent").val();
+                param.memoWriter = $("#memoWriter").val();
 
-                // TODO : param validation
-
-                __COMMON.ajax.ajaxLoad("memo/save", param, function() {
+                __COMMON.ajax.ajaxLoad("/memo/save", param, function() {
 
                 });
 
@@ -119,6 +94,7 @@ var event = (function() {
 
     }
 }());
+
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 //시작함수 호출
