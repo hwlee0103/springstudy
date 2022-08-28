@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/common/common.js"></script>
+    <script src="/js/memo/memo.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<h1>게시글 저장</h1>
+<form id="newMemoData">
+<table>
+    <tr>
+        <td>
+        제목: <input name="memoTitle" type="text">
+        </td>
+    </tr>
+    <tr>
+        <td>
+        내용: <input name="memoContent" type="text">
+        </td>
+    </tr>
+    <tr>
+        <td>
+        작성자: <input name="memoWriter" type="text">
+        </td>
+    </tr>
+</table>
+    <button type="submit" id="btnSaveMemo">저장</button>
+</form>
+
+</body>
+</html>

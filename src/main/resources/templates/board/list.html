@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>게시글 목록</h1>
+<table boarder="1">
+    <thead>
+    <th:block>
+        #
+    </th:block>
+    <th:block>
+        제목
+    </th:block>
+    <th:block>
+        내용
+    </th:block>
+    <th:block>
+        작성자
+    </th:block>
+    <th:block>
+        작성일
+    </th:block>
+    <th:block>
+        수정자
+    </th:block>
+    <th:block>
+        수정일
+    </th:block>
+    </thead>
+    <tr th:each="boardItem:${boardList}">
+        <td th:text="${boardItem.boardSeq}"></td>
+        <td>
+            <a th:href="@{/board/detail/{boardSeq}(boardSeq = ${boardItem.boardSeq})}"><span th:text="${boardItem.boardTitle}"></span></a>
+        </td>
+        <td>
+            <a th:href="@{/board/detail/{boardSeq}(boardSeq = ${boardItem.boardSeq})}"><span th:text="${boardItem.boardContent}"></span></a>
+        </td>
+        <td th:text="${boardItem.boardWriter}"></td>
+        <td th:text="${#temporals.format(boardItem.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${boardItem.modifiedBy}"></td>
+        <td th:text="${#temporals.format(boardItem.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+    </tr>
+</table>
+</body>
