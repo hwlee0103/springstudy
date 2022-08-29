@@ -2,11 +2,13 @@ package com.example.springstudy.service.memo;
 
 import com.example.springstudy.entity.memo.MemoEntity;
 import com.example.springstudy.repository.memo.MemoRepository;
+import org.apache.coyote.http11.filters.IdentityInputFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemoService {
@@ -28,6 +30,18 @@ public class MemoService {
     public List<MemoEntity> findAll(){
 
         return this.memoRepository.findAll();
+    }
+
+    /**
+     * 게시글 단건 조회
+     * @param memoSeq
+     * @return
+     */
+    public MemoEntity findMemo(Integer memoSeq) {
+        Optional<MemoEntity> memoItem = this.memoRepository.findById(memoSeq);
+        MemoEntity resultItem = memoItem.get();
+
+        return resultItem;
     }
 
     //#endregion

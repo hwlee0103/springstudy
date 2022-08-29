@@ -8,6 +8,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.xml.ws.Service;
 import java.util.List;
 
 @Controller
@@ -31,12 +32,14 @@ public class MemoController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView memoList(ModelAndView mav){
         mav.setViewName("memo/list");
-        // TODO memo list 불러오기
-        // mav.addObject("memoList", memoService.findAll());
 
         return mav;
     }
 
+    /**
+     * 게시글 리스트 조회
+     * @return
+     */
     @RequestMapping(value = "/listdata", method = RequestMethod.POST)
     @ResponseBody
     public List<MemoEntity> memoList(){
@@ -51,6 +54,36 @@ public class MemoController {
 
         return memoEntityList;
     }
+
+    /**
+     * 게시글 상세 페이지
+     * @param memoSeq
+     * @return
+     */
+    @RequestMapping(value = "/detail/{memoSeq}", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView memoDetail(ModelAndView mav, @PathVariable(name = "memoSeq") Integer memoSeq) {
+        //MemoEntity memoItem = memoService.findMemo(memoSeq);
+        mav.setViewName("memo/detail");
+        //mav.addObject("memoItem", memoItem);
+        mav.addObject("memoSeq", memoSeq);
+        return mav;
+    }
+
+    /**
+     * 게시글 단건 조회
+     * @param memoSeq
+     * @return
+     */
+    @RequestMapping(value = "/detaildata", method = RequestMethod.POST)
+    @ResponseBody
+    public MemoEntity memoDetailData(@RequestBody Integer memoSeq) {
+        // @RequestParam vs @RequestBody
+        //MemoEntity memoItem = memoService.findMemo(Integer.valueOf(Integer.parseInt(memoSeq)));
+        MemoEntity memoItem = memoService.findMemo(memoSeq);
+        return memoItem;
+    }
+    
 
     //#endregion
 
