@@ -55,6 +55,9 @@ public class MemoService {
      */
     public void saveMemo(MemoEntity memoEntity) {
         // TODO memoEntity Validation
+        memoEntity.setCreatedBy(memoEntity.getMemoWriter());
+        memoEntity.setModifiedBy(memoEntity.getMemoWriter());
+
         if(ObjectUtils.isEmpty(memoEntity) == false) {
             MemoEntity result = this.memoRepository.saveAndFlush(memoEntity);
         } else {

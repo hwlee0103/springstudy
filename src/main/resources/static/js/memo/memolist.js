@@ -60,9 +60,10 @@ var bind = (function() {
                     for(var rowNum in _result){
 						var _obj = _result[rowNum];
 						var _memoSeq = "<td>" + __COMMON.utils.isNull(_obj.memoSeq, "string") + "</td>";
-						var _memoTitle = "<td>" + __COMMON.utils.isNull(_obj.memoTitle, "string") + "</td>";
-						var _memoContent = "<td>" + __COMMON.utils.isNull(_obj.memoContent, "number") + "</td>";
-						_html.push("<tr>" + _memoSeq + _memoTitle + _memoContent
+						var _memoTitle = "<td class='memoTitle'><a name='" + _obj.memoSeq + "'>" + __COMMON.utils.isNull(_obj.memoTitle, "string") + "</a></td>";
+						var _memoContent = "<td>" + __COMMON.utils.isNull(_obj.memoContent, "string") + "</td>";
+                        var _memoWriter = "<td>" + __COMMON.utils.isNull(_obj.memoWriter, "string") + "</td>";
+						_html.push("<tr>" + _memoSeq + _memoTitle + _memoContent + _memoWriter
                             +"</tr>");
 					}
 					jQuery("#tbody").html(_html.join(""));
@@ -104,6 +105,15 @@ var event = (function() {
             // jQuery("#btnAddName").off("click.add").on("click.add", function(){
             //     // TODO add
             // });
+
+            // TODO: List에서 항목 선택 시
+            jQuery(".memoTitle").off("click.add").on("click.add", function(){
+                var param = new Object();
+                //param.memoSeq = $("#memoSeq").val();
+                 __COMMON.ajax.ajaxLoad("/memo/detaildata", param, function(p_data){
+
+                 })
+            });
         },
 
     }

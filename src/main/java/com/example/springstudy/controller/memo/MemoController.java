@@ -54,21 +54,21 @@ public class MemoController {
 
         return memoEntityList;
     }
-
-    /**
-     * 게시글 상세 페이지
-     * @param memoSeq
-     * @return
-     */
-    @RequestMapping(value = "/detail/{memoSeq}", method = RequestMethod.GET)
-    @ResponseBody
-    public ModelAndView memoDetail(ModelAndView mav, @PathVariable(name = "memoSeq") Integer memoSeq) {
-        //MemoEntity memoItem = memoService.findMemo(memoSeq);
-        mav.setViewName("memo/detail");
-        //mav.addObject("memoItem", memoItem);
-        mav.addObject("memoSeq", memoSeq);
-        return mav;
-    }
+//
+//    /**
+//     * 게시글 상세 페이지
+//     * @param memoSeq
+//     * @return
+//     */
+//    @RequestMapping(value = "/detail/{memoSeq}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public ModelAndView memoDetail(ModelAndView mav, @PathVariable(name = "memoSeq") Integer memoSeq) {
+//        //MemoEntity memoItem = memoService.findMemo(memoSeq);
+//        mav.setViewName("memo/detail");
+//        //mav.addObject("memoItem", memoItem);
+//        mav.addObject("memoSeq", memoSeq);
+//        return mav;
+//    }
 
     /**
      * 게시글 단건 조회

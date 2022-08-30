@@ -46,28 +46,28 @@ var bind = (function() {
         // sample 데이터 바인딩
         //---------------------------------------------------------------------------------------------------------
         dataBind : function(){
-            var _params = {};
-            _params = {
-                memoSeq: $("#memoSeq").val()
-            }
-            // TODO: data 조회
-            __COMMON.ajax.ajaxLoad("/memo/detaildata", _params, function (p_data) {
-                var _result = p_data;
-
-                var _html = [];
-
-                if(p_data != null) {
-                    var _memoSeq = "<td>" + __COMMON.utils.isNull(_result.memoSeq, "string") + "</td>";
-                    var _memoTitle = "<td>" + __COMMON.utils.isNull(_result.memoTitle, "string") + "</td>";
-                    var _memoContent = "<tr><td>" + __COMMON.utils.isNull(_result.memoContent, "string") + "</td></tr>";
-                    var _memoWriter = "<tr><td>" + __COMMON.utils.isNull(_result.memoWriter, "string") + "</td></tr>";
-                    _html.push("<tr>" + _memoSeq + _memoTitle + "</tr>" + _memoContent + _memoWriter);
-                    jQuery("#tbody").html(_html.join(""));
-                } else {
-                    alert("Detail 데이터가 존재하지 않습니다.")
-                }
-            }, false
-                , jQuery("#btn") );
+            // var _params = {};
+            // _params = {
+            //     memoSeq: $("#memoSeq").val()
+            // }
+            // // TODO: data 조회
+            // __COMMON.ajax.ajaxLoad("/memo/detaildata", _params, function (p_data) {
+            //     var _result = p_data;
+            //
+            //     var _html = [];
+            //
+            //     if(p_data != null) {
+            //         var _memoSeq = "<td>" + __COMMON.utils.isNull(_result.memoSeq, "string") + "</td>";
+            //         var _memoTitle = "<td>" + __COMMON.utils.isNull(_result.memoTitle, "string") + "</td>";
+            //         var _memoContent = "<tr><td>" + __COMMON.utils.isNull(_result.memoContent, "string") + "</td></tr>";
+            //         var _memoWriter = "<tr><td>" + __COMMON.utils.isNull(_result.memoWriter, "string") + "</td></tr>";
+            //         _html.push("<tr>" + _memoSeq + _memoTitle + "</tr>" + _memoContent + _memoWriter);
+            //         jQuery("#tbody").html(_html.join(""));
+            //     } else {
+            //         alert("Detail 데이터가 존재하지 않습니다.")
+            //     }
+            // }, false
+            //     , jQuery("#btn") );
         },
 
     }
