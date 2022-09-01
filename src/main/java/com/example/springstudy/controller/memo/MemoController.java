@@ -8,7 +8,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.xml.ws.Service;
 import java.util.List;
 
 @Controller
@@ -54,7 +53,7 @@ public class MemoController {
 
         return memoEntityList;
     }
-//
+
 //    /**
 //     * 게시글 상세 페이지
 //     * @param memoSeq
@@ -64,24 +63,25 @@ public class MemoController {
 //    @ResponseBody
 //    public ModelAndView memoDetail(ModelAndView mav, @PathVariable(name = "memoSeq") Integer memoSeq) {
 //        //MemoEntity memoItem = memoService.findMemo(memoSeq);
-//        mav.setViewName("memo/detail");
+//        //mav.setViewName("memo/detail");
 //        //mav.addObject("memoItem", memoItem);
-//        mav.addObject("memoSeq", memoSeq);
+//        //mav.addObject("memoSeq", memoSeq);
 //        return mav;
 //    }
 
     /**
      * 게시글 단건 조회
-     * @param memoSeq
+     * @param memoEntity
      * @return
      */
     @RequestMapping(value = "/detaildata", method = RequestMethod.POST)
-    @ResponseBody
-    public MemoEntity memoDetailData(@RequestBody Integer memoSeq) {
+    public ModelAndView memoDetailData(@RequestBody MemoEntity memoEntity, ModelAndView modelAndView) {
         // @RequestParam vs @RequestBody
-        //MemoEntity memoItem = memoService.findMemo(Integer.valueOf(Integer.parseInt(memoSeq)));
-        MemoEntity memoItem = memoService.findMemo(memoSeq);
-        return memoItem;
+        MemoEntity memoItem = memoService.findMemo(memoEntity.getMemoSeq());
+        // detail page 로 가야하는데?
+        modelAndView.setViewName("memo/detail");
+        modelAndView.addObject("memoItem", memoItem);
+        return modelAndView;
     }
     
 
@@ -123,4 +123,18 @@ public class MemoController {
 
     //#endregion
 
+    //#region - 삭제
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deleteMemo(@RequestBody MemoEntity memoEntity) {
+
+        if(ObjectUtils.isEmpty(memoEntity.getMemoSeq()) == false){
+            memoService.deleteMemo(memoEntity.getMemoSeq());
+        } else {
+
+        }
+        return "redirect:list";
+    }
+
+    //#endregion
 }

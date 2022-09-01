@@ -2,7 +2,6 @@ package com.example.springstudy.service.memo;
 
 import com.example.springstudy.entity.memo.MemoEntity;
 import com.example.springstudy.repository.memo.MemoRepository;
-import org.apache.coyote.http11.filters.IdentityInputFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -67,5 +66,13 @@ public class MemoService {
 
     //#endregion
 
+    //#region - 삭제
 
+    public void deleteMemo(Integer memoSeq) {
+        if(ObjectUtils.isEmpty(memoSeq) == false) {
+            this.memoRepository.deleteById(memoSeq);
+        }
+    }
+
+    //#endregion
 }

@@ -98,6 +98,15 @@ var event = (function() {
         //---------------------------------------------------------------------------------------------------------
         clickAddName : function(){
             // TODO: 삭제 버튼 기능 추가
+            jQuery("#deleteButton").off("click.add").on("click", function(){
+
+                var param = new Object();
+                param.memoSeq = $("#memoSeq").val();
+
+                __COMMON.ajax.ajaxLoad("/memo/delete", param, function(){
+
+                });
+            });
             // TODO: 목록가기 버튼 기능 추가
         },
 

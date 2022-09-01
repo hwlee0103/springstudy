@@ -22,7 +22,6 @@ var main = (function() {
         //---------------------------------------------------------------------------------------------------------
         init : function(){
            // TODO sample
-		   bind.eventBind();
 		   bind.dataBind();
         }
     }
@@ -60,7 +59,7 @@ var bind = (function() {
                     for(var rowNum in _result){
 						var _obj = _result[rowNum];
 						var _memoSeq = "<td>" + __COMMON.utils.isNull(_obj.memoSeq, "string") + "</td>";
-						var _memoTitle = "<td class='memoTitle'><a name='" + _obj.memoSeq + "'>" + __COMMON.utils.isNull(_obj.memoTitle, "string") + "</a></td>";
+						var _memoTitle = "<td class='memoTitle' id='" + _obj.memoSeq + "'>" + __COMMON.utils.isNull(_obj.memoTitle, "string") + "</td>";
 						var _memoContent = "<td>" + __COMMON.utils.isNull(_obj.memoContent, "string") + "</td>";
                         var _memoWriter = "<td>" + __COMMON.utils.isNull(_obj.memoWriter, "string") + "</td>";
 						_html.push("<tr>" + _memoSeq + _memoTitle + _memoContent + _memoWriter
@@ -71,8 +70,10 @@ var bind = (function() {
 					// sample no data
                     alert("데이터가 존재하지 않습니다.");
                 }
+                bind.eventBind();
 
-            }, false //동기/비동기
+
+                }, false //동기/비동기
 			, jQuery("#btn") );
         },
 		
@@ -102,16 +103,15 @@ var event = (function() {
         // sample 클릭 추가 이벤트
         //---------------------------------------------------------------------------------------------------------
         clickAddName : function(){
-            // jQuery("#btnAddName").off("click.add").on("click.add", function(){
-            //     // TODO add
-            // });
+            console.log("click evt");
 
-            // TODO: List에서 항목 선택 시
-            jQuery(".memoTitle").off("click.add").on("click.add", function(){
-                var param = new Object();
-                //param.memoSeq = $("#memoSeq").val();
-                 __COMMON.ajax.ajaxLoad("/memo/detaildata", param, function(p_data){
-
+            jQuery("#tbody td.memoTitle").off("click.add").on("click.add", function(e){
+                console.log("click");
+                var _param = new Object();
+                _param.memoSeq = e.target.id;
+                 __COMMON.ajax.ajaxLoad("/memo/detaildata", _param, function(p_data){
+                     // detail page로 넘어가야하는데?
+                     alert(p_data);
                  })
             });
         },
