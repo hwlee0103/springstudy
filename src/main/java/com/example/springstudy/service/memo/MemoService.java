@@ -64,6 +64,22 @@ public class MemoService {
         }
     }
 
+    /**
+     * 게시글 수정
+     * @param memoEntity
+     */
+    public Boolean updateMemo(MemoEntity memoEntity) {
+        Boolean result = false;
+        memoEntity.setModifiedBy(memoEntity.getMemoWriter());
+        MemoEntity saved = this.memoRepository.saveAndFlush(memoEntity);
+        if(ObjectUtils.isEmpty(saved) == false) {
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
+
     //#endregion
 
     //#region - 삭제

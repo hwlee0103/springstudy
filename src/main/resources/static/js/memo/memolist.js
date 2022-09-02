@@ -107,12 +107,7 @@ var event = (function() {
 
             jQuery("#tbody td.memoTitle").off("click.add").on("click.add", function(e){
                 console.log("click");
-                var _param = new Object();
-                _param.memoSeq = e.target.id;
-                 __COMMON.ajax.ajaxLoad("/memo/detaildata", _param, function(p_data){
-                     // detail page로 넘어가야하는데?
-                     alert(p_data);
-                 })
+                location.href = "/memo/detail/" + e.target.id;
             });
         },
 

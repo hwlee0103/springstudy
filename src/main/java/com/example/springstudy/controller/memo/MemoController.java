@@ -54,20 +54,20 @@ public class MemoController {
         return memoEntityList;
     }
 
-//    /**
-//     * 게시글 상세 페이지
-//     * @param memoSeq
-//     * @return
-//     */
-//    @RequestMapping(value = "/detail/{memoSeq}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public ModelAndView memoDetail(ModelAndView mav, @PathVariable(name = "memoSeq") Integer memoSeq) {
-//        //MemoEntity memoItem = memoService.findMemo(memoSeq);
-//        //mav.setViewName("memo/detail");
-//        //mav.addObject("memoItem", memoItem);
-//        //mav.addObject("memoSeq", memoSeq);
-//        return mav;
-//    }
+    /**
+     * 게시글 상세 페이지
+     * @param memoSeq
+     * @return
+     */
+    @RequestMapping(value = "/detail/{memoSeq}", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView memoDetail(ModelAndView mav, @PathVariable(name = "memoSeq") Integer memoSeq) {
+        //MemoEntity memoItem = memoService.findMemo(memoSeq);
+        mav.setViewName("memo/detail");
+        //mav.addObject("memoItem", memoItem);
+        //mav.addObject("memoSeq", memoSeq);
+        return mav;
+    }
 
     /**
      * 게시글 단건 조회
@@ -75,13 +75,11 @@ public class MemoController {
      * @return
      */
     @RequestMapping(value = "/detaildata", method = RequestMethod.POST)
-    public ModelAndView memoDetailData(@RequestBody MemoEntity memoEntity, ModelAndView modelAndView) {
+    @ResponseBody
+    public MemoEntity memoDetailData(@RequestBody MemoEntity memoEntity, ModelAndView modelAndView) {
         // @RequestParam vs @RequestBody
         MemoEntity memoItem = memoService.findMemo(memoEntity.getMemoSeq());
-        // detail page 로 가야하는데?
-        modelAndView.setViewName("memo/detail");
-        modelAndView.addObject("memoItem", memoItem);
-        return modelAndView;
+        return memoItem;
     }
     
 
@@ -120,20 +118,38 @@ public class MemoController {
         return "redirect:list";
     }
 
+    /**
+     * 게시글 수정
+     * @param memoEntity
+     * @return
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean updateMemo(@RequestBody MemoEntity memoEntity){
+        Boolean result = false;
+        if(ObjectUtils.isEmpty(memoEntity) == false) {
+            result = memoService.updateMemo(memoEntity);
+        } else {
+            result = false;
+        }
+        return result;
+    }
+
 
     //#endregion
 
     //#region - 삭제
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deleteMemo(@RequestBody MemoEntity memoEntity) {
+    @ResponseBody
+    public Boolean deleteMemo(@RequestBody MemoEntity memoEntity) {
 
         if(ObjectUtils.isEmpty(memoEntity.getMemoSeq()) == false){
             memoService.deleteMemo(memoEntity.getMemoSeq());
         } else {
 
         }
-        return "redirect:list";
+        return true;
     }
 
     //#endregion

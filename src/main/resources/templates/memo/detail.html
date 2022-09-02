@@ -13,16 +13,26 @@
 <table id="memo_detail_table">
     <thead>
     <tr>
-        <td>게시글 조회 # </td>
-        <td>
-            <div id="memoSeq" th:text="${memoSeq}" readonly="true"></div>
-        </td>
+        <td>게시글 조회 # <span id="memoSeq" th:text="${memoSeq}" th:data-id="${memoSeq}"></span></td>
     </tr>
     </thead>
     <tbody id="tbody">
+        <tr>
+            <td>제목 : <input id="memoTitle"></td>
+        </tr>
+
+        <tr>
+            <td>내용 : <input id="memoContent"></td>
+        </tr>
+
+        <tr>
+            <td>작성자 : <input id="memoWriter"></td>
+        </tr>
 
     </tbody>
-    <button id="deleteButton" type="button">삭제</button>
 </table>
+<button id="updateButton" type="button">수정</button>
+<button id="saveButton" type="button" hidden="true">저장</button>
+<button id="deleteButton" type="button">삭제</button>
 </body>
 </html>
