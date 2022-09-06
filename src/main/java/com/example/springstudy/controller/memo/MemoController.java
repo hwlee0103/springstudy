@@ -62,10 +62,7 @@ public class MemoController {
     @RequestMapping(value = "/detail/{memoSeq}", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView memoDetail(ModelAndView mav, @PathVariable(name = "memoSeq") Integer memoSeq) {
-        //MemoEntity memoItem = memoService.findMemo(memoSeq);
         mav.setViewName("memo/detail");
-        //mav.addObject("memoItem", memoItem);
-        //mav.addObject("memoSeq", memoSeq);
         return mav;
     }
 
@@ -81,7 +78,25 @@ public class MemoController {
         MemoEntity memoItem = memoService.findMemo(memoEntity.getMemoSeq());
         return memoItem;
     }
+
+    // TODO: 댓글
+    /*
+    1. 댓글 Table 설계
+    - 게시글 seq를 foreign key로 해서 어떤 게시글에 달린 댓글인지 column으로 가지고 있기
+    - 나중에 depth를 늘릴 걸 생각하면 (대댓글) depth 컬럼도 가지고 있어야하고
+    - 대댓글 순서도 필요한데 대댓글 seq 기준으로 출력하면 되니까 seq로 충분할 것 같고,
+    - 대댓글은 어떤 댓글에 달린 애들인지 알아야 하니까 윗 Depth 의 id를 가지고 있어야한다. comment group
+    - 대댓글의 depth가 2 이상일 경우도 필요할까?
+    - 그러면 depth가 2이상일 경우에는 depth가 한 개 상위인 애들을 모두 scan해서 comment group을 찾아야하나
+    - 나중에 depth가 한 5정도 되면 table scan이 비효율적일까?
     
+    - 공통적인 사항은 BaseEntity로 빼볼가ㅏㅏㅏ
+
+    2. 댓글 작성 - html
+
+    3. 댓글 조회 - js에서 조회해오기
+
+    */
 
     //#endregion
 
@@ -153,4 +168,5 @@ public class MemoController {
     }
 
     //#endregion
+
 }
