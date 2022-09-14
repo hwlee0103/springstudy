@@ -10,6 +10,11 @@
 <body>
 <h1>Memo Detail</h1>
 <a href="/memo/list/"><span>목록보기</span></a>
+
+<div>
+    <span>======================================================</span>
+</div>
+
 <table id="memo_detail_table">
     <thead>
     <tr>
@@ -20,19 +25,32 @@
         <tr>
             <td>제목 : <input id="memoTitle"></td>
         </tr>
-
         <tr>
             <td>내용 : <input id="memoContent"></td>
         </tr>
-
         <tr>
             <td>작성자 : <input id="memoWriter"></td>
         </tr>
-
     </tbody>
 </table>
 <button id="updateButton" type="button">수정</button>
 <button id="saveButton" type="button" hidden="true">저장</button>
 <button id="deleteButton" type="button">삭제</button>
+
+<div>
+    <span>======================================================</span>
+</div>
+
+<h4>댓글</h4>
+<table>
+    <tbody id="comment-body">
+
+    </tbody>
+</table>
+
+<div>
+    <span>======================================================</span>
+</div>
+
 </body>
 </html>

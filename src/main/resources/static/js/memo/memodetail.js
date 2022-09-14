@@ -38,7 +38,6 @@ var bind = (function() {
         // sample 이벤트 바인딩
         //---------------------------------------------------------------------------------------------------------
         eventBind : function(){
-            // TODO sample 이벤트 바인딩
             event.clickAddName();
         },
 
@@ -50,7 +49,10 @@ var bind = (function() {
             _params = {
                 memoSeq : $("#memoSeq").data("id")
             }
-            // TODO: data 조회
+
+            //#region - data 조회
+
+            // memo detail data 조회
             __COMMON.ajax.ajaxLoad("/memo/detaildata", _params, function (p_data) {
                 var _result = p_data;
 
@@ -71,10 +73,28 @@ var bind = (function() {
                     _$memoContent.val(_memoContent).prop("readOnly", true);
                     _$memoWriter.val(_memoWriter).prop("readOnly", true);
                 } else {
-                    alert("Detail 데이터가 존재하지 않습니다.")
+                    alert("Memo Detail 데이터가 존재하지 않습니다.")
                 }
             }, false
-                , jQuery("#btn") );
+            , jQuery("#btn"));
+
+            // comment data 조회
+            __COMMON.ajax.ajaxLoad("/comment/listdata", _params, function(p_data) {
+                var _result = p_data;
+
+                var _html = [];
+
+                if(p_data != null) {
+                    // TODO: 댓글 목록 setting
+                    alert("Comment List");
+                } else {
+                    // TODO: 댓글 없음
+                    alert("Comment 데이터가 존재하지 않습니다.");
+                }
+            }, false
+            , jQuery("#btn"));
+
+            //#endregion
         },
 
     }
@@ -104,7 +124,7 @@ var event = (function() {
         // sample 클릭 추가 이벤트
         //---------------------------------------------------------------------------------------------------------
         clickAddName : function(){
-            // TODO: 수정 버튼 기능 추가
+            // 수정 버튼
             jQuery("#updateButton").off("click.add").on("click", function(){
                 var _$memoTitle = $("#memoTitle");
                 var _$memoContent = $("#memoContent");
@@ -120,7 +140,7 @@ var event = (function() {
 
             });
 
-            // TODO: 저장 버튼 기능 추가
+            // 저장 버튼
             jQuery("#saveButton").off("click.add").on("click", function(){
                 var _$memoTitle = $("#memoTitle");
                 var _$memoContent = $("#memoContent");
@@ -150,7 +170,7 @@ var event = (function() {
                 _$saveButton.prop("hidden", true);
             });
 
-            // TODO: 삭제 버튼 기능 추가
+            // 삭제 버튼
             jQuery("#deleteButton").off("click.add").on("click", function(){
 
                 var _param = new Object();
@@ -165,7 +185,6 @@ var event = (function() {
                     }
                 });
             });
-            // TODO: 목록가기 버튼 기능 추가
         },
 
     }

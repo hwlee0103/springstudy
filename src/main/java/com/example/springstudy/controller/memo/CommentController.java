@@ -1,0 +1,62 @@
+package com.example.springstudy.controller.memo;
+
+import com.example.springstudy.entity.memo.CommentEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+@RequestMapping(value = "/comment")
+public class CommentController {
+
+    //#region - 조회
+
+    @PostMapping(value = "/listdata")
+    @ResponseBody
+    public List<CommentEntity> commentList() {
+        List<CommentEntity> commentList = new ArrayList<CommentEntity>();
+        //조회
+        return commentList;
+    }
+    /*
+    + 댓글 보여주는 html
+    -- Detail 페이지 load시 댓글 가져오기
+    -- js에서 댓글 조회해오는 ajax 로직
+    -- 조회해와서 service단에서 재귀로 탐색, 정렬
+    -- List<T>로 가져와서 Stream으로 정렬 및 필터 가능
+    -- 그리고 그대로 화면으로 가져가서 setting
+    -- html - 댓글 더보기 버튼
+    */
+
+    //#endregion
+
+
+    //#region - 저장
+
+    /*
+    + 댓글 작성 칸 Memo Detail 페이지에 생성
+    -- 기존 댓글 있으면 맨 위에 댓글 작성 칸 만들기
+    -- 작성 클릭 시 ajax로 save 보내고
+    -- 작성 끝나면 페이지 reload(?)
+    */
+
+    //#endregion
+
+
+    //#region - 삭제
+
+    /*
+    + 댓글 삭제하기
+    -- 댓글 삭제 - 삭제된 댓글일 시 [삭제된 댓글입니다] --?
+    -- 대댓글이 아닌 일반 댓글은 DelYN으로 삭제여부 체크해야하나?
+    -- 삭제 시 Delyn = y
+    -- 내용은 [삭제된 댓글입니다.] ?
+    */
+
+    //#endregion
+
+}
