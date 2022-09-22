@@ -86,7 +86,7 @@ var bind = (function() {
 
                 if(p_data != null) {
                     // TODO: 댓글 목록 setting
-                    alert("Comment List");
+                    //alert("Comment List");
                 } else {
                     // TODO: 댓글 없음
                     alert("Comment 데이터가 존재하지 않습니다.");
@@ -132,6 +132,21 @@ var event = (function() {
                 var _$updateButton = $("#updateButton");
                 var _$saveButton = $("#saveButton");
 
+                _param = {
+                    memoSeq : $("#memoSeq").data("id"),
+                    memoTitle : _$memoTitle.val(),
+                    memoContent : _$memoContent.val(),
+                    memoWriter : _$memoWriter.val()
+                }
+
+                __COMMON.ajax.ajaxLoad("/memo/update", _param, function (p_data){
+                    if(p_data == true) {
+                        alert("저장되었습니다.");
+                    } else {
+                        alert("저장이 되지 않았습니다.");
+                    }
+                });
+
                 _$memoTitle.prop("readOnly", false);
                 _$memoContent.prop("readOnly", false);
                 _$memoWriter.prop("readOnly", false);
@@ -168,6 +183,24 @@ var event = (function() {
                 _$memoWriter.prop("readOnly", true);
                 _$updateButton.prop("hidden", false);
                 _$saveButton.prop("hidden", true);
+            });
+
+            jQuery("#commentSaveButton").off("click.add").on("click", function(){
+               var _$newCommentContent = $("#newCommentContent");
+               var _$newCommentWriter = $("#newCommentWriter");
+
+               var _param = {
+                   memoSeq : $("#memoSeq").data("id"),
+                   commentContent : _$newCommentContent.val(),
+                   commentWriter : _$newCommentWriter.val()
+               }
+
+               __COMMON.ajax.ajaxLoad("/comment/save", _param, function(p_data){
+                    if(p_data == true) {
+                        location.reload();
+                        //$("#comment-body").load("${contextpath}/comment/listdata #comment-body");
+                    }
+               });
             });
 
             // 삭제 버튼

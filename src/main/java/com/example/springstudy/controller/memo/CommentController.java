@@ -1,25 +1,39 @@
 package com.example.springstudy.controller.memo;
 
 import com.example.springstudy.entity.memo.CommentEntity;
+import com.example.springstudy.service.memo.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/comment")
 public class CommentController {
 
+    private final CommentService commentService;
+
+    @Autowired
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
+    }
     //#region - 조회
 
+    /**
+     * 댓글 조회
+     * @param commentEntity
+     * @return
+     */
     @PostMapping(value = "/listdata")
     @ResponseBody
-    public List<CommentEntity> commentList() {
-        List<CommentEntity> commentList = new ArrayList<CommentEntity>();
-        //조회
+    public List<CommentEntity> commentList(@RequestBody CommentEntity commentEntity) {
+        List<CommentEntity> commentList = this.commentService.findCommentList(commentEntity.getMemoSeq());
+
         return commentList;
     }
     /*
@@ -43,6 +57,23 @@ public class CommentController {
     -- 작성 클릭 시 ajax로 save 보내고
     -- 작성 끝나면 페이지 reload(?)
     */
+
+    /**
+     * 댓글 저장
+     * @param commentEntity
+     */
+    @PostMapping(value = "/save")
+    @ResponseBody
+    public Boolean commentSave(@RequestBody CommentEntity commentEntity) {
+        Boolean result = false;
+        if(ObjectUtils.isEmpty(commentEntity) == false){
+            result = this.commentService.saveComment(commentEntity);
+        } else {
+            result = false;
+        }
+
+        return result;
+    }
 
     //#endregion
 
