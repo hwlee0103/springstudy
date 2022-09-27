@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CommentService {
@@ -23,12 +25,13 @@ public class CommentService {
     //#region - 조회
 
     public List<CommentEntity> findCommentList(Integer memoSeq) {
-        List<CommentEntity> commentList = this.commentRepository.findByMemoSeq(memoSeq);
+        List<CommentEntity> commentList = this.commentRepository.findByMemoSeqOrderByCommentGroup(memoSeq);
 
         //재귀,,,,,?
         //commentDTO 생성해서 그 안에서 List를 가지고 있고 List 자료형이 commentDTO라면?
         List<CommentDTO> commentDtoList = new ArrayList<CommentDTO>();
-        //map으로 하면 ?..?
+        Map<Long, CommentDTO> map = new HashMap<>();
+        
         for(CommentEntity commentItem : commentList) {
 
         }

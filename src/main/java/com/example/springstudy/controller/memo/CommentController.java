@@ -22,6 +22,7 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
+
     //#region - 조회
 
     /**
@@ -41,7 +42,7 @@ public class CommentController {
     -- Detail 페이지 load시 댓글 가져오기
     -- js에서 댓글 조회해오는 ajax 로직
     -- 조회해와서 service단에서 재귀로 탐색, 정렬
-    -- List<T>로 가져와서 Stream으로 정렬 및 필터 가능
+    -- List<T>로 가져와서 Stream으로 정렬 및 필터 가능?
     -- 그리고 그대로 화면으로 가져가서 setting
     -- html - 댓글 더보기 버튼
     */
