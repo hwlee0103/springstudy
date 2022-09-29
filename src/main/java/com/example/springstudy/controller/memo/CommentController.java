@@ -1,6 +1,7 @@
 package com.example.springstudy.controller.memo;
 
 import com.example.springstudy.entity.memo.CommentEntity;
+import com.example.springstudy.model.comment.CommentDTO;
 import com.example.springstudy.service.memo.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,10 +33,17 @@ public class CommentController {
      */
     @PostMapping(value = "/listdata")
     @ResponseBody
-    public List<CommentEntity> commentList(@RequestBody CommentEntity commentEntity) {
-        List<CommentEntity> commentList = this.commentService.findCommentList(commentEntity.getMemoSeq());
+    //public List<CommentDTO> commentList(@RequestBody CommentEntity commentEntity) {
+    public String commentList(@RequestBody CommentEntity commentEntity) {
+        List<CommentDTO> commentList = this.commentService.findCommentList(commentEntity.getMemoSeq());
 
-        return commentList;
+        //Service 단에서 html setting해서 넘겨주면?
+        String commentHtml = "{\"commentHtml\":\"<div><span>CommentList</span></div>\"}";
+
+
+
+        return commentHtml;
+        //return commentList;
     }
     /*
     + 댓글 보여주는 html

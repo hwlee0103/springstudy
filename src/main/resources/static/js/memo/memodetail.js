@@ -82,11 +82,14 @@ var bind = (function() {
             __COMMON.ajax.ajaxLoad("/comment/listdata", _params, function(p_data) {
                 var _result = p_data;
 
-                var _html = [];
+                var _html = p_data.commentHtml;
 
                 if(p_data != null) {
                     // TODO: 댓글 목록 setting
-                    //alert("Comment List");
+                    alert("Comment List");
+
+                    $("#comment-body").html(_html);
+
                 } else {
                     // TODO: 댓글 없음
                     alert("Comment 데이터가 존재하지 않습니다.");
@@ -96,7 +99,10 @@ var bind = (function() {
 
             //#endregion
         },
+        //재귀형식으로 댓글 setting //????
+        setCommentData: function(p_data) {
 
+        }
     }
 }());
 
