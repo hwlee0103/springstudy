@@ -86,10 +86,10 @@ var bind = (function() {
 
                 if(p_data != null) {
                     // TODO: 댓글 목록 setting
-                    alert("Comment List");
+                    //alert("Comment List");
 
                     $("#comment-body").html(_html);
-
+                    event.clickAddAction(); //새로 생성된 애들한테 eventbind
                 } else {
                     // TODO: 댓글 없음
                     alert("Comment 데이터가 존재하지 않습니다.");
@@ -226,6 +226,19 @@ var event = (function() {
             });
         },
 
+        clickAddAction: function() {
+            jQuery("button[name='commentDeleteBtn']").off("click.add").on("click", function() {
+                var _param = new Object();
+                //댓글 대댓글 삭제 로직
+                //_param.commentSeq = $("span[name='commentSeq']").data("id");
+                _param.commentSeq = $(this).prev().data("id");
+                __COMMON.ajax.ajaxLoad("/comment/delete", _param, function(p_data) {
+                    if(p_data == true) {
+                        location.reload();
+                    }
+                });
+            });
+        },
     }
 }());
 

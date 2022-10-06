@@ -40,43 +40,45 @@ public class CommentService {
             if(commentItem.getCommentGroup() != 0) {
                 //commentGroup이 0이 아니면 (부모 댓글이 있는 경우) 부모댓글에 add
                 map.get(commentItem.getCommentGroup()).getReply().add(dto);
-                //test +=
             } else {
                 // 최상위 댓글 그룹
                 commentDtoList.add(dto);
-                test += "<div>" + dto.getCommentContent() + "</div>";
             }
         }
 
         return commentDtoList;
     }
 
+    /**
+     * 댓글 대댓글 HTML문 만들기
+     * @param commentList
+     * @return
+     */
     //commentList - 댓글 대댓글 재귀형태로 조회
     public String makeCommentHtml(List<CommentDTO> commentList) {
-        String result = "<div>";
+        String result = "";
+        result += "<div>";
 
         //for로 전체 탐색
         for(CommentDTO commentItem : commentList) {
-            result += makeCommentHtmlItem(commentItem);
-//            if(ObjectUtils.isEmpty(commentItem.getReply()) == false) {
-//                //자식 노드가 있을 경우
-//                result += makeCommentHtmlItem(commentItem.getReply());
-//            } else {
-//
-//            }
+            result += "<p>";
+            if(commentItem.getCommentDepth() - 1 > 0) {
+                for(int i = 0; i < commentItem.getCommentDepth() - 1; ++i) {
+                    result += "   L";
+                }
+            }
+
+            result += " 번호 : <span name='commentSeq' th:data-id='${" + commentItem.getCommentSeq() + "}'>" + commentItem.getCommentSeq() + "</span> | Depth: " + commentItem.getCommentDepth()
+                    + " | Group: " + commentItem.getCommentGroup()
+                    + " | 댓글: " + commentItem.getCommentContent() + " | 작성자: " + commentItem.getCommentWriter() + "   "
+                    + "<button type='button' name='commentDeleteBtn'> 삭제 </button></p>";
+
+            if(ObjectUtils.isEmpty(commentItem.getReply()) == false) {
+                result += "<div>" + makeCommentHtml(commentItem.getReply()) + "</div>";
+            }
         }
         result += "</div>";
         return result;
-    }
-
-    public String makeCommentHtmlItem(CommentDTO commentItem) {
-        String str = "";
-
-        if(ObjectUtils.isEmpty(commentItem.getReply()) == false) {
-            //str += makeCommentHtmlItem()
-        }
-
-        return str;
     }
 
     //#endregion
@@ -101,6 +103,24 @@ public class CommentService {
         } else {
             result = false;
         }
+        return result;
+    }
+
+    //#endregion
+
+    //#region - 삭제
+
+    public Boolean deleteComment(CommentEntity commentEntity) {
+        Boolean result = false;
+
+        commentEntity.setCommentContent("삭제된 댓글입니다.");
+        commentEntity.setCommentWriter("삭제된 댓글입니다.");
+        CommentEntity saved = this.commentRepository.saveAndFlush(commentEntity);
+
+        if(ObjectUtils.isEmpty(saved) == false) {
+            result = true;
+        }
+
         return result;
     }
 

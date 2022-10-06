@@ -38,9 +38,8 @@ public class CommentController {
         List<CommentDTO> commentList = this.commentService.findCommentList(commentEntity.getMemoSeq());
 
         //Service 단에서 html setting해서 넘겨주면?
-        String commentHtml = "{\"commentHtml\":\"<div><span>CommentList</span></div>\"}";
-
-
+        //String commentHtml = "{\"commentHtml\":\"<div><span>CommentList</span></div>\"}";
+        String commentHtml = "{\"commentHtml\":\"<div>" + commentService.makeCommentHtml(commentList) + "</div>\"}";
 
         return commentHtml;
         //return commentList;
@@ -89,6 +88,17 @@ public class CommentController {
 
     //#region - 삭제
 
+    @PostMapping(value = "/delete")
+    @ResponseBody
+    public Boolean commentDelete(@RequestBody CommentEntity commentEntity) {
+        Boolean result = false;
+
+        if(ObjectUtils.isEmpty(commentEntity) == false) {
+            result = this.commentService.deleteComment(commentEntity);
+        }
+
+        return result;
+    }
     /*
     + 댓글 삭제하기
     -- 댓글 삭제 - 삭제된 댓글일 시 [삭제된 댓글입니다] --?
