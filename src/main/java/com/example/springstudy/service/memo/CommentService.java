@@ -61,21 +61,24 @@ public class CommentService {
 
         //for로 전체 탐색
         for(CommentDTO commentItem : commentList) {
-            result += "<p>";
+            result += "<div>";
             if(commentItem.getCommentDepth() - 1 > 0) {
                 for(int i = 0; i < commentItem.getCommentDepth() - 1; ++i) {
                     result += "   L";
                 }
             }
 
-            result += " 번호 : <span name='commentSeq' th:data-id='${" + commentItem.getCommentSeq() + "}'>" + commentItem.getCommentSeq() + "</span> | Depth: " + commentItem.getCommentDepth()
-                    + " | Group: " + commentItem.getCommentGroup()
-                    + " | 댓글: " + commentItem.getCommentContent() + " | 작성자: " + commentItem.getCommentWriter() + "   "
-                    + "<button type='button' name='commentDeleteBtn'> 삭제 </button></p>";
+            result += " 번호 : <span name='commentSeq'>" + commentItem.getCommentSeq() +
+                    "</span> | Depth: <span name='commentDepth'>" + commentItem.getCommentDepth()
+                    + "</span> | Group: <span name='commentGroup'>" + commentItem.getCommentGroup()
+                    + "</span> | 댓글: " + commentItem.getCommentContent() +
+                    " | 작성자: <span name='commentWriter'>" + commentItem.getCommentWriter() + "   "
+                    + "</span><button type='button' name='commentDeleteBtn'> 삭제 </button>";
 
             if(ObjectUtils.isEmpty(commentItem.getReply()) == false) {
                 result += "<div>" + makeCommentHtml(commentItem.getReply()) + "</div>";
             }
+            result += "</div>";
         }
         result += "</div>";
         return result;
@@ -110,12 +113,15 @@ public class CommentService {
 
     //#region - 삭제
 
-    public Boolean deleteComment(CommentEntity commentEntity) {
+    public Boolean deleteComment(CommentEntity commentEntity, Boolean isChild) {
         Boolean result = false;
-
-        commentEntity.setCommentContent("삭제된 댓글입니다.");
-        commentEntity.setCommentWriter("삭제된 댓글입니다.");
-        CommentEntity saved = this.commentRepository.saveAndFlush(commentEntity);
+        CommentEntity saved = new CommentEntity();
+        if(isChild == true) {
+            commentEntity.setCommentContent("삭제된 댓글입니다.");
+            saved = this.commentRepository.saveAndFlush(commentEntity);
+        } else {
+            this.commentRepository.deleteById(commentEntity.getCommentSeq());
+        }
 
         if(ObjectUtils.isEmpty(saved) == false) {
             result = true;

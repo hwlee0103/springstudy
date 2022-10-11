@@ -230,8 +230,20 @@ var event = (function() {
             jQuery("button[name='commentDeleteBtn']").off("click.add").on("click", function() {
                 var _param = new Object();
                 //댓글 대댓글 삭제 로직
-                //_param.commentSeq = $("span[name='commentSeq']").data("id");
-                _param.commentSeq = $(this).prev().data("id");
+                _param.commentSeq = parseInt($(this).parent().find("span[name=commentSeq]").html());
+                _param.commentDepth = parseInt($(this).parent().find("span[name=commentDepth]").html());
+                _param.commentGroup = parseInt($(this).parent().find("span[name=commentGroup]").html());
+                _param.memoSeq = $("#memoSeq").data("id");
+                _param.commentWriter = $(this).parent().find("span[name=commentWriter]").html();
+
+                if($(this).parent().children("div").html() === "undefined") {
+                    _param.isChild = false;
+                } else {
+                    _param.isChild = true;
+                }
+                //_param.isChild = $(this).parent().children("div").html();
+                //alert(_param.isChild);
+                //alert(_param.commentSeq + "  " + _param.commentDepth + "  " + _param.commentGroup);
                 __COMMON.ajax.ajaxLoad("/comment/delete", _param, function(p_data) {
                     if(p_data == true) {
                         location.reload();

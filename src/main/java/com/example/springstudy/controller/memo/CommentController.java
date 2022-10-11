@@ -90,11 +90,11 @@ public class CommentController {
 
     @PostMapping(value = "/delete")
     @ResponseBody
-    public Boolean commentDelete(@RequestBody CommentEntity commentEntity) {
+    public Boolean commentDelete(@RequestBody CommentEntity commentEntity, Boolean isChild) {
         Boolean result = false;
 
         if(ObjectUtils.isEmpty(commentEntity) == false) {
-            result = this.commentService.deleteComment(commentEntity);
+            result = this.commentService.deleteComment(commentEntity, isChild);
         }
 
         return result;

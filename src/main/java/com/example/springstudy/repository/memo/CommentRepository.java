@@ -21,4 +21,11 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     
     // 게시글 번호별 댓글 조회 - 부모 댓글 순으로 정렬 조회
     List<CommentEntity> findByMemoSeqOrderByCommentGroup(Integer memoSeq);
+
+    /**
+     * 댓글삭제
+     * @param integer must not be {@literal null}.
+     */
+    @Override
+    void deleteById(Integer integer);
 }
