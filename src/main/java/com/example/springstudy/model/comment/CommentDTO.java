@@ -23,6 +23,9 @@ public class CommentDTO {
     private String commentContent;
 
     private String commentWriter;
+    
+    // 자식 댓글 여부
+    private Boolean isChild;
 
     private LocalDateTime createdDate;
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,9 +72,10 @@ public class CommentService {
             result += " 번호 : <span name='commentSeq'>" + commentItem.getCommentSeq() +
                     "</span> | Depth: <span name='commentDepth'>" + commentItem.getCommentDepth()
                     + "</span> | Group: <span name='commentGroup'>" + commentItem.getCommentGroup()
-                    + "</span> | 댓글: " + commentItem.getCommentContent() +
-                    " | 작성자: <span name='commentWriter'>" + commentItem.getCommentWriter() + "   "
-                    + "</span><button type='button' name='commentDeleteBtn'> 삭제 </button>";
+                    + "</span> | 댓글: <input type='text' readonly='true' value='" + commentItem.getCommentContent() +
+                    "' /> | 작성자: <span name='commentWriter'>" + commentItem.getCommentWriter() + "   "
+                    + "</span><button type='button' name='commentModifyBtn'> 수정 </button><button type='button' hidden='true' name='commentModifySaveBtn'> 저장 </button><button type='button' name='commentDeleteBtn'> 삭제 </button>"
+                    + "<div><input type='text' name='replyContent'/></div>" ;
 
             if(ObjectUtils.isEmpty(commentItem.getReply()) == false) {
                 result += "<div>" + makeCommentHtml(commentItem.getReply()) + "</div>";
@@ -109,14 +111,53 @@ public class CommentService {
         return result;
     }
 
+    /**
+     * 대댓글 저장
+     * @param commentEntity
+     * @return
+     */
+    public Boolean saveReply(CommentEntity commentEntity) {
+        Boolean saved = false;
+        CommentEntity replySaved = this.commentRepository.saveAndFlush(commentEntity);
+
+        if(ObjectUtils.isEmpty(replySaved) == false) {
+            saved = true;
+        }
+
+        return saved;
+    }
+    //#endregion
+
+    //#region - 수정
+
+    public Boolean modifyComment(CommentEntity commentEntity) {
+        Boolean res = false;
+        CommentEntity saved = this.commentRepository.saveAndFlush(commentEntity);
+
+        if(ObjectUtils.isEmpty(saved) == false) {
+            res = true;
+        }
+
+        return res;
+    }
+
     //#endregion
 
     //#region - 삭제
 
-    public Boolean deleteComment(CommentEntity commentEntity, Boolean isChild) {
+    public Boolean deleteComment(CommentDTO commentDto) {
         Boolean result = false;
+        CommentEntity commentEntity = new CommentEntity();
         CommentEntity saved = new CommentEntity();
-        if(isChild == true) {
+
+        commentEntity.setCommentSeq(commentDto.getCommentSeq());
+        commentEntity.setMemoSeq(commentDto.getMemoSeq());
+        commentEntity.setCommentDepth(commentDto.getCommentDepth());
+        commentEntity.setCommentGroup(commentDto.getCommentGroup());
+        commentEntity.setCommentWriter(commentDto.getCommentWriter());
+        commentEntity.setModifiedDate(LocalDateTime.now());
+
+        if(commentDto.getIsChild() != null && commentDto.getIsChild() == true) {
             commentEntity.setCommentContent("삭제된 댓글입니다.");
             saved = this.commentRepository.saveAndFlush(commentEntity);
         } else {

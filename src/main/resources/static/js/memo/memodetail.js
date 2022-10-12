@@ -227,6 +227,54 @@ var event = (function() {
         },
 
         clickAddAction: function() {
+
+            jQuery("button[name='commentModifySaveBtn']").off("click.add").on("click", function () {
+                // Q. 이렇게 화면에서 데이터를 일일히 가져오는 것 vs commentSeq가지고 조회해와서 조회 결과를 가지고 save해주는 것?
+                var _$commentSeq = $(this).parent().find(">span[name='commentSeq']");
+                var _$memoSeq = $("#memoSeq");
+                var _$commentDepth = $(this).parent().find(">span[name='commentDepth']");
+                var _$commentGroup = $(this).parent().find(">span[name='commentGroup']");
+                var _$commentContent = $(this).parent().find(">input");
+                var _$commentWriter = $(this).parent().find(">span[name='commentWriter']");
+                var _$commentModifyBtn = $(this);
+                var _$commentMoifySaveBtn = $(this).parent().find(">button[name='commentModifySaveBtn']");
+
+                var _param = {
+                    commentSeq: parseInt(_$commentSeq.html()),
+                    memoSeq: _$memoSeq.data("id"),
+                    commentDepth: parseInt(_$commentDepth.html()),
+                    commentGroup: parseInt(_$commentGroup.html()),
+                    commentContent: _$commentContent.val(),
+                    commentWriter: _$commentWriter.html()
+                };
+
+                __COMMON.ajax.ajaxLoad("/comment/modify", _param, function (p_data) {
+                    if(p_data == true) {
+                        //alert("수정되었습니다.");
+                        location.reload();
+                    } else {
+                        //alert("수정되지 않았습니다.");
+                    }
+
+                    _$commentContent.prop("readonly", true);
+                    _$commentModifyBtn.prop("hidden", false);
+                    _$commentMoifySaveBtn.prop("hidden", true);
+                });
+
+                // _$commentContent.prop("readonly", true);
+                // _$commentModifyBtn.prop("hidden", false);
+                // _$commentMoifySaveBtn.prop("hidden", true);
+            });
+
+            jQuery("button[name='commentModifyBtn']").off("click.add").on("click", function(){
+                var _$commentContent = $(this).parent().find(">input");
+                var _$commentModifyBtn = $(this);
+                var _$commentMoifySaveBtn = $(this).parent().find(">button[name='commentModifySaveBtn']");
+                _$commentContent.prop("readonly", false);
+                _$commentModifyBtn.prop("hidden", true);
+                _$commentMoifySaveBtn.prop("hidden", false);
+            });
+
             jQuery("button[name='commentDeleteBtn']").off("click.add").on("click", function() {
                 var _param = new Object();
                 //댓글 대댓글 삭제 로직
@@ -236,14 +284,12 @@ var event = (function() {
                 _param.memoSeq = $("#memoSeq").data("id");
                 _param.commentWriter = $(this).parent().find("span[name=commentWriter]").html();
 
-                if($(this).parent().children("div").html() === "undefined") {
+                if($(this).parent().children("div").html() === undefined) {
                     _param.isChild = false;
                 } else {
                     _param.isChild = true;
                 }
-                //_param.isChild = $(this).parent().children("div").html();
-                //alert(_param.isChild);
-                //alert(_param.commentSeq + "  " + _param.commentDepth + "  " + _param.commentGroup);
+
                 __COMMON.ajax.ajaxLoad("/comment/delete", _param, function(p_data) {
                     if(p_data == true) {
                         location.reload();

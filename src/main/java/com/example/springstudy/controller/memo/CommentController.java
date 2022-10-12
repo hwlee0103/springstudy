@@ -83,18 +83,51 @@ public class CommentController {
         return result;
     }
 
+    /**
+     * 대댓글 저장
+     * @param commentEntity
+     * @return
+     */
+    @PostMapping(value = "/saveReply")
+    @ResponseBody
+    public Boolean saveReply(@RequestBody CommentEntity commentEntity) {
+        Boolean res = false;
+
+        if(ObjectUtils.isEmpty(commentEntity) == false) {
+            res = this.commentService.saveReply(commentEntity);
+        }
+
+        return true;
+    }
+
     //#endregion
 
+    //#region - 수정
+
+    @RequestMapping(value = "/modify")
+    @ResponseBody
+    public Boolean commentModify(@RequestBody CommentEntity commentEntity) {
+        Boolean saved = false;
+
+        if(ObjectUtils.isEmpty(commentEntity) == false) {
+            saved = this.commentService.modifyComment(commentEntity);
+            this.commentService.modifyComment(commentEntity);
+        }
+
+        return saved;
+    }
+
+    //#endregion
 
     //#region - 삭제
 
     @PostMapping(value = "/delete")
     @ResponseBody
-    public Boolean commentDelete(@RequestBody CommentEntity commentEntity, Boolean isChild) {
+    public Boolean commentDelete(@RequestBody CommentDTO commentDto) {
         Boolean result = false;
 
-        if(ObjectUtils.isEmpty(commentEntity) == false) {
-            result = this.commentService.deleteComment(commentEntity, isChild);
+        if(ObjectUtils.isEmpty(commentDto) == false) {
+            result = this.commentService.deleteComment(commentDto);
         }
 
         return result;
