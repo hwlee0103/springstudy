@@ -296,6 +296,34 @@ var event = (function() {
                     }
                 });
             });
+
+            jQuery("button[name='commentReplyBtn']").off("click.add").on("click", function() {
+                
+                // TODO : 대댓글 입력창 만들기
+                var _$comment = $(this); // 이거아닌거같은데.....
+
+                var inputHtml = "<input id='replyContent' placeholder='대댓글 내용' type='text' />"
+                                + "<input id='replyWriter' placeholder='대댓글 작성자' type='text' />";
+
+                _$comment.append(inputHtml);
+                
+            });
+
+            jQuery("button[name='replySave']").off("click.add").on("click", function() {
+                var _param = new Object();
+
+                _param.commentDepth = parseInt($(this).data("depth") + 1);
+                _param.commentContent = $(this).parent().find("input[name='replyContent']").val();
+                _param.commentWriter = $(this).parent().find("input[name='replyWriter']").val();
+                _param.commentGroup = $(this).data("id");
+                _param.memoSeq = $("#memoSeq").data("id");
+
+                __COMMON.ajax.ajaxLoad('/comment/saveReply', _param, function(p_data) {
+                    if(p_data == true) {
+                        location.reload();
+                    }
+                });
+            });
         },
     }
 }());

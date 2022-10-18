@@ -69,13 +69,14 @@ public class CommentService {
                 }
             }
 
-            result += " 번호 : <span name='commentSeq'>" + commentItem.getCommentSeq() +
-                    "</span> | Depth: <span name='commentDepth'>" + commentItem.getCommentDepth()
-                    + "</span> | Group: <span name='commentGroup'>" + commentItem.getCommentGroup()
+            result += "<span name='commentSeq'>" + commentItem.getCommentSeq() +
+                    "</span><span name='commentDepth' style='display:none;'>" + commentItem.getCommentDepth()
+                    + "</span><span name='commentGroup' style='display:none;'>" + commentItem.getCommentGroup()
                     + "</span> | 댓글: <input type='text' readonly='true' value='" + commentItem.getCommentContent() +
                     "' /> | 작성자: <span name='commentWriter'>" + commentItem.getCommentWriter() + "   "
-                    + "</span><button type='button' name='commentModifyBtn'> 수정 </button><button type='button' hidden='true' name='commentModifySaveBtn'> 저장 </button><button type='button' name='commentDeleteBtn'> 삭제 </button>"
-                    + "<div><input type='text' name='replyContent'/></div>" ;
+                    + "</span><button type='button' name='commentModifyBtn'> 수정 </button><button type='button' hidden='true' name='commentModifySaveBtn'> 저장 </button><button type='button' name='commentDeleteBtn'> 삭제 </button><button type='button' name='commentReplyBtn'> 댓글 </button>"
+                    + "<input type='text' name='replyContent' placeholder='대댓글 내용 입력'/><input type='text' name='replyWriter' placeholder='대댓글 작성자'/>"
+                    + "<button type='button' name='replySave' data-id="+ commentItem.getCommentSeq() +" data-depth=" + commentItem.getCommentDepth() + ">대댓글 저장</button>" ;
 
             if(ObjectUtils.isEmpty(commentItem.getReply()) == false) {
                 result += "<div>" + makeCommentHtml(commentItem.getReply()) + "</div>";
@@ -118,6 +119,8 @@ public class CommentService {
      */
     public Boolean saveReply(CommentEntity commentEntity) {
         Boolean saved = false;
+        commentEntity.setCreatedBy(commentEntity.getCommentWriter());
+        commentEntity.setModifiedBy(commentEntity.getCommentWriter());
         CommentEntity replySaved = this.commentRepository.saveAndFlush(commentEntity);
 
         if(ObjectUtils.isEmpty(replySaved) == false) {
