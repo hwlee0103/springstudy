@@ -28,11 +28,9 @@ public class CommentService {
     public List<CommentDTO> findCommentList(Integer memoSeq) {
         List<CommentEntity> commentList = this.commentRepository.findByMemoSeqOrderByCommentGroup(memoSeq);
 
-        //commentDTO 생성해서 그 안에서 List를 가지고 있고 List 자료형이 commentDTO라면?
+        //commentDTO 생성해서 그 안에서 List를 가지고 있고 List 자료형이 commentDTO - Reply
         List<CommentDTO> commentDtoList = new ArrayList<CommentDTO>();
         Map<Integer, CommentDTO> map = new HashMap<>();
-
-        String test = "";
 
         for(CommentEntity commentItem : commentList) {
             CommentDTO dto = CommentDTO.convertCommentToDto(commentItem);
@@ -41,6 +39,7 @@ public class CommentService {
             if(commentItem.getCommentGroup() != 0) {
                 //commentGroup이 0이 아니면 (부모 댓글이 있는 경우) 부모댓글에 add
                 map.get(commentItem.getCommentGroup()).getReply().add(dto);
+                //null check 추가
             } else {
                 // 최상위 댓글 그룹
                 commentDtoList.add(dto);
@@ -74,7 +73,7 @@ public class CommentService {
                     + "</span><span name='commentGroup' style='display:none;'>" + commentItem.getCommentGroup()
                     + "</span> | 댓글: <input type='text' readonly='true' value='" + commentItem.getCommentContent() +
                     "' /> | 작성자: <span name='commentWriter'>" + commentItem.getCommentWriter() + "   "
-                    + "</span><button type='button' name='commentModifyBtn'> 수정 </button><button type='button' hidden='true' name='commentModifySaveBtn'> 저장 </button><button type='button' name='commentDeleteBtn'> 삭제 </button><button type='button' name='commentReplyBtn'> 댓글 </button>"
+                    + "</span><button type='button' name='commentModifyBtn'> 수정 </button><button type='button' hidden='true' name='commentModifySaveBtn'> 저장 </button><button type='button' name='commentDeleteBtn'> 삭제 </button>"
                     + "<input type='text' name='replyContent' placeholder='대댓글 내용 입력'/><input type='text' name='replyWriter' placeholder='대댓글 작성자'/>"
                     + "<button type='button' name='replySave' data-id="+ commentItem.getCommentSeq() +" data-depth=" + commentItem.getCommentDepth() + ">대댓글 저장</button>" ;
 

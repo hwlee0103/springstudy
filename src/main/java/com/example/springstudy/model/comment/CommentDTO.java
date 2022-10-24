@@ -44,7 +44,7 @@ public class CommentDTO {
         this.createdDate = createdDate;
     }
 
-
+    //validation 추가 필요
     //convert CommentEntity to CommentDTO
     public static CommentDTO convertCommentToDto(CommentEntity commentEntity) {
         return new CommentDTO(commentEntity.getCommentSeq(), commentEntity.getMemoSeq(),
