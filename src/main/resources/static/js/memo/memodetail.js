@@ -212,7 +212,7 @@ var event = (function() {
             // 삭제 버튼
             jQuery("#deleteButton").off("click.add").on("click", function(){
 
-                var _param = new Object();
+                var _param = {};
                 _param.memoSeq = $("#memoSeq").data("id");
 
                 __COMMON.ajax.ajaxLoad("/memo/delete", _param, function(p_data){
@@ -276,7 +276,7 @@ var event = (function() {
             });
 
             jQuery("button[name='commentDeleteBtn']").off("click.add").on("click", function() {
-                var _param = new Object();
+                var _param = {};
                 //댓글 대댓글 삭제 로직
                 _param.commentSeq = parseInt($(this).parent().find("span[name=commentSeq]").html());
                 _param.commentDepth = parseInt($(this).parent().find("span[name=commentDepth]").html());
@@ -310,7 +310,7 @@ var event = (function() {
             });
 
             jQuery("button[name='replySave']").off("click.add").on("click", function() {
-                var _param = new Object();
+                var _param = {};
 
                 _param.commentDepth = parseInt($(this).data("depth") + 1);
                 _param.commentContent = $(this).parent().find("input[name='replyContent']").val();

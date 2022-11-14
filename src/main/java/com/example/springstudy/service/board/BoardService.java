@@ -134,11 +134,7 @@ public class BoardService {
     private boolean validBoard(BoardEntity boardEntity) {
         boolean result = false;
 
-        if(ObjectUtils.isEmpty(boardEntity) == true) {
-            result = false;
-        } else {
-            result = true;
-        }
+        result = ObjectUtils.isEmpty(boardEntity) != true;
 
         return result;
     }

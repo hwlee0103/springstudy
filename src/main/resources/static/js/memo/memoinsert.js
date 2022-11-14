@@ -80,7 +80,7 @@ var event = (function() {
             jQuery("#btnSaveMemo").off("click.add").on("click", function(){
                 // TODO saveMemo ajax
                 // 선택자
-                var param = new Object();
+                var param = {};
                 param.memoTitle = $("#memoTitle").val();
                 param.memoContent = $("#memoContent").val();
                 param.memoWriter = $("#memoWriter").val();

@@ -72,11 +72,7 @@ public class MemoService {
         Boolean result = false;
         memoEntity.setModifiedBy(memoEntity.getMemoWriter());
         MemoEntity saved = this.memoRepository.saveAndFlush(memoEntity);
-        if(ObjectUtils.isEmpty(saved) == false) {
-            result = true;
-        } else {
-            result = false;
-        }
+        result = ObjectUtils.isEmpty(saved) == false;
         return result;
     }
 

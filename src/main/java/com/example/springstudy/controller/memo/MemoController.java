@@ -25,11 +25,12 @@ public class MemoController {
 
     /**
      * 게시글 조회 페이지
+     *
      * @param mav
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView memoList(ModelAndView mav){
+    public ModelAndView memoList(ModelAndView mav) {
         mav.setViewName("memo/list");
 
         return mav;
@@ -37,15 +38,16 @@ public class MemoController {
 
     /**
      * 게시글 리스트 조회
+     *
      * @return
      */
     @RequestMapping(value = "/listdata", method = RequestMethod.POST)
     @ResponseBody
-    public List<MemoEntity> memoList(){
+    public List<MemoEntity> memoList() {
         // TODO memo list 불러오기
         List<MemoEntity> memoEntityList = memoService.findAll();
 
-        if(ObjectUtils.isEmpty(memoEntityList) == false) {
+        if (ObjectUtils.isEmpty(memoEntityList) == false) {
             // TODO return data 있을 때
         } else {
             // TODO exception
@@ -56,6 +58,7 @@ public class MemoController {
 
     /**
      * 게시글 상세 페이지
+     *
      * @param memoSeq
      * @return
      */
@@ -68,6 +71,7 @@ public class MemoController {
 
     /**
      * 게시글 단건 조회
+     *
      * @param memoEntity
      * @return
      */
@@ -85,6 +89,7 @@ public class MemoController {
 
     /**
      * 게시글 저장 페이지
+     *
      * @param mav
      * @return
      */
@@ -98,6 +103,7 @@ public class MemoController {
 
     /**
      * 게시글 저장
+     *
      * @param memoEntity
      * @return
      */
@@ -105,7 +111,7 @@ public class MemoController {
     public String saveMemo(@RequestBody MemoEntity memoEntity) {
         // TODO memo save
 
-        if(ObjectUtils.isEmpty(memoEntity) == false) {
+        if (ObjectUtils.isEmpty(memoEntity) == false) {
             memoService.saveMemo(memoEntity);
         } else {
             // TODO : exception
@@ -116,14 +122,15 @@ public class MemoController {
 
     /**
      * 게시글 수정
+     *
      * @param memoEntity
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean updateMemo(@RequestBody MemoEntity memoEntity){
+    public Boolean updateMemo(@RequestBody MemoEntity memoEntity) {
         Boolean result = false;
-        if(ObjectUtils.isEmpty(memoEntity) == false) {
+        if (ObjectUtils.isEmpty(memoEntity) == false) {
             result = memoService.updateMemo(memoEntity);
         } else {
             result = false;
@@ -140,7 +147,7 @@ public class MemoController {
     @ResponseBody
     public Boolean deleteMemo(@RequestBody MemoEntity memoEntity) {
 
-        if(ObjectUtils.isEmpty(memoEntity.getMemoSeq()) == false){
+        if (ObjectUtils.isEmpty(memoEntity.getMemoSeq()) == false) {
             memoService.deleteMemo(memoEntity.getMemoSeq());
         } else {
 

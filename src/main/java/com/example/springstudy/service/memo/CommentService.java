@@ -103,11 +103,7 @@ public class CommentService {
         commentEntity.setModifiedBy(commentEntity.getCommentWriter());
 
         CommentEntity saved = this.commentRepository.saveAndFlush(commentEntity);
-        if(ObjectUtils.isEmpty(saved) == false) {
-            result = true;
-        } else {
-            result = false;
-        }
+        result = ObjectUtils.isEmpty(saved) == false;
         return result;
     }
 

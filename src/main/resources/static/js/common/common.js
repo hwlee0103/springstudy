@@ -135,7 +135,7 @@ com.example.springstudy.common.ajax = (function() {
                         if (p_errorCallBack && Object.prototype.toString.call(p_errorCallBack) == '[object Function]') {
                             p_errorCallBack(p_jqXHR, p_textStatus, p_errorThrown);
                         }
-                        return;
+
                     }
                 })
             );
