@@ -1,5 +1,6 @@
 package com.example.springstudy.controller.menu;
 
+import com.example.springstudy.entity.menu.MenuEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/menu")
 // Q. menu는 항상 보여야하는거면 어떻게 항상 보여주지?
 public class MenuController {
+
 
     //#region - 조회
     //#endregion
