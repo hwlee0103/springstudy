@@ -58,22 +58,24 @@ public class MenuDTO {
         return description;
     }
 
+    //?
     private MenuDTO(MenuDTOBuilder builder) {
         this.menuId = builder.menuId;
         this.parentMenuId = builder.parentMenuId;
         this.topParentMenuId = builder.topParentMenuId;
-//        private Integer depth;
-//        private String menuName;
-//        private String menuType;
-//        private String link;
-//        private String linkOpenType;
-//        private Character pcExposureTf;
-//        private Character mobileExposureTf;
-//        private Character exposureTf;
-//        private Integer sort;
-//        private String description;
+        this.depth = builder.depth;
+        this.menuName = builder.menuName;
+        this.menuType = builder.menuType;
+        this.link = builder.link;
+        this.linkOpenType = builder.linkOpenType;
+        this.pcExposureTf = builder.pcExposureTf;
+        this.mobileExposureTf = builder.mobileExposureTf;
+        this.exposureTf = builder.exposureTf;
+        this.sort = builder.sort;
+        this.description = builder.description;
     }
 
+    //?
     public static class MenuDTOBuilder {
         private String menuId;
         private String parentMenuId;
@@ -105,9 +107,58 @@ public class MenuDTO {
             return this;
         }
 
-        // Q. 필수 입력 필드 강제하면 여기서 따로 해줄필요 없는것?
+        //?
+        // Q. 필수 입력 필드 강제하면 여기서 따로 해줄필요 없는것? 아니면 그래도 해줘야하는 것?
         public MenuDTOBuilder menuId(String menuId) {
             this.menuId = menuId;
+            return this;
+        }
+        public MenuDTOBuilder parentMenuId(String parentMenuId) {
+            this.parentMenuId = parentMenuId;
+            return this;
+        }
+        public MenuDTOBuilder topParentMenuId(String topParentMenuId) {
+            this.topParentMenuId = topParentMenuId;
+            return this;
+        }
+        public MenuDTOBuilder depth(Integer depth) {
+            this.depth = depth;
+            return this;
+        }
+        public MenuDTOBuilder menuName(String menuName) {
+            this.menuName = menuName;
+            return this;
+        }
+        public MenuDTOBuilder menuType(String menuType) {
+            this.menuType = menuType;
+            return this;
+        }
+        public MenuDTOBuilder link(String link) {
+            this.link = link;
+            return this;
+        }
+        public MenuDTOBuilder linkOpenType(String linkOpenType) {
+            this.linkOpenType = linkOpenType;
+            return this;
+        }
+        public MenuDTOBuilder pcExposureTf(Character pcExposureTf) {
+            this.pcExposureTf = pcExposureTf;
+            return this;
+        }
+        public MenuDTOBuilder mobileExposureTf(Character mobileExposureTf) {
+            this.mobileExposureTf = mobileExposureTf;
+            return this;
+        }
+        public MenuDTOBuilder exposureTf(Character exposureTf) {
+            this.exposureTf = exposureTf;
+            return this;
+        }
+        public MenuDTOBuilder sort(Integer sort) {
+            this.sort = sort;
+            return this;
+        }
+        public MenuDTOBuilder description(String description) {
+            this.description = description;
             return this;
         }
 
