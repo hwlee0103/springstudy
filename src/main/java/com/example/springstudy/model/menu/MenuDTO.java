@@ -2,7 +2,6 @@ package com.example.springstudy.model.menu;
 
 // Lombok 없이 사용하는 Builder Pattern
 public class MenuDTO {
-
     private String menuId;
     private String parentMenuId;
     private String topParentMenuId;
@@ -62,7 +61,7 @@ public class MenuDTO {
         this.menuId = builder.menuId;
         this.parentMenuId = builder.parentMenuId;
         this.topParentMenuId = builder.topParentMenuId;
-//        private Integer depth;
+        this.depth = builder.depth;
 //        private String menuName;
 //        private String menuType;
 //        private String link;
@@ -110,7 +109,26 @@ public class MenuDTO {
             this.menuId = menuId;
             return this;
         }
+        public MenuDTOBuilder parentMenuId(String parentMenuId) {
+            this.parentMenuId = parentMenuId;
+            return this;
+        }
+        public MenuDTOBuilder topParentMenuId(String topParentMenuId) {
+            this.topParentMenuId = topParentMenuId;
+            return this;
+        }
 
+
+        private Integer depth;
+        private String menuName;
+        private String menuType;
+        private String link;
+        private String linkOpenType;
+        private Character pcExposureTf;
+        private Character mobileExposureTf;
+        private Character exposureTf;
+        private Integer sort;
+        private String description;
         public MenuDTO build(){
             return new MenuDTO(this);
         }
