@@ -18,8 +18,15 @@ public class MenuController {
 
     //list도 조회해서 보여줘야하는건가?
     //list에는 Deth별로 디자인을 바꿔서 보여줘야할 필요가?
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView readMenuList(ModelAndView mav) {
+        mav.setViewName("menu/list");
+
+        return mav;
+    }
 
     //메뉴 detail
+
 
     //#endregion
 
@@ -35,9 +42,9 @@ public class MenuController {
      * @param mav
      * @return
      */
-    @RequestMapping(value = "/createPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/insert", method = RequestMethod.GET)
     public ModelAndView createMenuPage(ModelAndView mav) {
-        mav.setViewName("menu/create");
+        mav.setViewName("menu/insert");
 
         return mav;
     }
@@ -50,7 +57,6 @@ public class MenuController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createMenu(@RequestBody MenuEntity menuEntity) {
         String str = "";
-
 
         return str;
     }

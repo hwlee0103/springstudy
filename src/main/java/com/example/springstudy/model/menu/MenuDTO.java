@@ -58,7 +58,6 @@ public class MenuDTO {
         return description;
     }
 
-    //?
     private MenuDTO(MenuDTOBuilder builder) {
         this.menuId = builder.menuId;
         this.parentMenuId = builder.parentMenuId;
@@ -75,7 +74,6 @@ public class MenuDTO {
         this.description = builder.description;
     }
 
-    //?
     public static class MenuDTOBuilder {
         private String menuId;
         private String parentMenuId;
@@ -107,7 +105,6 @@ public class MenuDTO {
             return this;
         }
 
-        //?
         // Q. 필수 입력 필드 강제하면 여기서 따로 해줄필요 없는것? 아니면 그래도 해줘야하는 것?
         public MenuDTOBuilder menuId(String menuId) {
             this.menuId = menuId;
