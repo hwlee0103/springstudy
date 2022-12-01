@@ -6,12 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MenuRepository extends JpaRepository<MenuEntity, Integer> {
 
+    //#region - 조회
     @Override
     List<MenuEntity> findAll(Sort sort);
+
+    @Override
+    Optional<MenuEntity> findById(Integer menuId);
+    //#endregion
 
     @Override
     <S extends MenuEntity> S saveAndFlush(S entity);
