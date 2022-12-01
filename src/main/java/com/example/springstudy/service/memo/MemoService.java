@@ -27,7 +27,6 @@ public class MemoService {
      * @return
      */
     public List<MemoEntity> findAll(){
-
         return this.memoRepository.findAll();
     }
 
