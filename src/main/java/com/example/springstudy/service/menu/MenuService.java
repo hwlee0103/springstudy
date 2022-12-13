@@ -1,6 +1,6 @@
 package com.example.springstudy.service.menu;
 
-import com.example.springstudy.entity.menu.MenuEntity;
+import com.example.springstudy.entity.menu.;
 import com.example.springstudy.model.menu.MenuDTO;
 import com.example.springstudy.repository.menu.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,32 @@ public class MenuService {
 
     //#region - 조회
 
-    public List<MenuEntity> readMenuList() {
+    public List<> readMenuList() {
         return menuRepository.findAll();
     }
 
     // TODO: Optional? Builder?와 관련있나?
-    public Optional<MenuEntity> readMenuById(MenuDTO menuDTO) {
-        return menuRepository.findById(Integer.valueOf(menuDTO.getMenuId()));
+    public MenuDTO readMenuById(Integer menuId) {
+        Optional<MenuEntity> menuItem = this.menuRepository.findById(menuId);
+        MenuEntity resultMenuEntity = menuItem.get();
+
+        MenuDTO menuDTO = new MenuDTO.MenuDTOBuilder().builder(
+                resultMenuEntity.getMenuId(),
+                resultMenuEntity.getParentMenuId(),
+                resultMenuEntity.getTopParentMenuId(),
+                resultMenuEntity.getDepth(),
+                resultMenuEntity.getMenuName(),
+                resultMenuEntity.getMenuType(),
+                resultMenuEntity.getLink(),
+                resultMenuEntity.getLinkOpenType(),
+                resultMenuEntity.getPcExposureTf(),
+                resultMenuEntity.getMobileExposureTf(),
+                resultMenuEntity.getExposureTf(),
+                resultMenuEntity.getSort(),
+                resultMenuEntity.getDescription()
+        );
+        // TODO: menuEntity to DTO?
+        return ;
     }
 
     //#endregion

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface MenuRepository extends JpaRepository<MenuEntity, Integer> {
@@ -15,8 +14,9 @@ public interface MenuRepository extends JpaRepository<MenuEntity, Integer> {
     @Override
     List<MenuEntity> findAll(Sort sort);
 
-    @Override
-    Optional<MenuEntity> findById(Integer menuId);
+
+    //Optional<MenuDTO> findById(String menuId);
+
     //#endregion
 
     @Override

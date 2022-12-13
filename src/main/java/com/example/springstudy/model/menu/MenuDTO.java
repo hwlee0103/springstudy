@@ -58,7 +58,7 @@ public class MenuDTO {
         return description;
     }
 
-    private MenuDTO(MenuDTOBuilder builder) {
+    public MenuDTO(MenuDTOBuilder builder) {
         this.menuId = builder.menuId;
         this.parentMenuId = builder.parentMenuId;
         this.topParentMenuId = builder.topParentMenuId;
@@ -74,6 +74,23 @@ public class MenuDTO {
         this.description = builder.description;
     }
 
+    // Q? Builder를 쓰면 convert를 못하나?
+    /*public static MenuDTO convertMenuEntityToDto(MenuEntity menuEntity) {
+        return new MenuDTO(menuEntity.getMenuId(),
+                menuEntity.getParentMenuId(),
+                menuEntity.getTopParentMenuId(),
+                menuEntity.getDepth(),
+                menuEntity.getMenuName(),
+                menuEntity.getMenuType(),
+                menuEntity.getLink(),
+                menuEntity.getLinkOpenType(),
+                menuEntity.getPcExposureTf(),
+                menuEntity.getMobileExposureTf(),
+                menuEntity.getExposureTf(),
+                menuEntity.getSort(),
+                menuEntity.getDescription());
+    }
+*/
     public static class MenuDTOBuilder {
         private String menuId;
         private String parentMenuId;

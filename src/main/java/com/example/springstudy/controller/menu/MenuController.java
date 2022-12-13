@@ -1,12 +1,11 @@
 package com.example.springstudy.controller.menu;
 
-import com.example.springstudy.entity.menu.MenuEntity;
+import com.example.springstudy.entity.menu.;
+import com.example.springstudy.model.menu.MenuDTO;
 import com.example.springstudy.service.menu.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -33,11 +32,32 @@ public class MenuController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView readMenuList(ModelAndView mav) {
         mav.setViewName("menu/list");
-        // TODO: MenuEntity to MenuDTO
+        // TODO:  to MenuDTO
         //List<MenuDTO> menuList = menuService.readMenuList();
         List<MenuEntity> menuList = menuService.readMenuList();
 
         return mav;
+    }
+
+    /**
+     * 메뉴 상세 페이지
+     *
+     * @param mav
+     * @param menuId
+     * @return
+     */
+    @GetMapping(value = "/detail/{menuId}")
+    @ResponseBody
+    public ModelAndView readMenuDetail(ModelAndView mav, @PathVariable(name="menuId") String menuId) {
+        mav.setViewName("menu/detail");
+        return mav;
+    }
+
+    @PostMapping(value = "/detaildata")
+    @ResponseBody
+    public MenuDTO readMenuById(@RequestBody MenuDTO menuDTO) {
+        MenuDTO menuItem = menuService.readMenuById(menuDTO.getMenuId());
+        return menuItem;
     }
 
     //#endregion
