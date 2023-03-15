@@ -1,7 +1,7 @@
-package com.example.springstudy.springstart.controller.board;
+package com.example.springstudy.controller.board;
 
-import com.example.springstudy.springstart.entity.board.BoardEntity;
-import com.example.springstudy.springstart.service.board.BoardService;
+import com.example.springstudy.entity.board.BoardEntity;
+import com.example.springstudy.service.board.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

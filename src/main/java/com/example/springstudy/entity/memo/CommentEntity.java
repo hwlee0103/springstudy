@@ -1,6 +1,6 @@
-package com.example.springstudy.springstart.entity.memo;
+package com.example.springstudy.entity.memo;
 
-import com.example.springstudy.springstart.entity.BaseEntity;
+import com.example.springstudy.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

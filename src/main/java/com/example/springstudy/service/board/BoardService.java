@@ -1,7 +1,7 @@
-package com.example.springstudy.springstart.service.board;
+package com.example.springstudy.service.board;
 
-import com.example.springstudy.springstart.entity.board.BoardEntity;
-import com.example.springstudy.springstart.repository.board.BoardRepository;
+import com.example.springstudy.entity.board.BoardEntity;
+import com.example.springstudy.repository.board.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;

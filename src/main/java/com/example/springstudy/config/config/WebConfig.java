@@ -1,4 +1,4 @@
-package com.example.springstudy.springstart.config.config;
+package com.example.springstudy.config.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

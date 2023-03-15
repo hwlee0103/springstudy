@@ -1,6 +1,6 @@
-package com.example.springstudy.springstart.repository.menu;
+package com.example.springstudy.repository.menu;
 
-import com.example.springstudy.springstart.entity.menu.MenuEntity;
+import com.example.springstudy.entity.menu.MenuEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

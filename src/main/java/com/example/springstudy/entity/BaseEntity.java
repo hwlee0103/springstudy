@@ -1,4 +1,4 @@
-package com.example.springstudy.springstart.entity;
+package com.example.springstudy.entity;
 
 import com.sun.istack.NotNull;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.example.springstudy.springstart.repository.board;
+package com.example.springstudy.repository.board;
 
-import com.example.springstudy.springstart.entity.board.BoardEntity;
+import com.example.springstudy.entity.board.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

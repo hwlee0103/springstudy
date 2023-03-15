@@ -1,4 +1,4 @@
-package com.example.springstudy.springstart.entity.board;
+package com.example.springstudy.entity.board;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

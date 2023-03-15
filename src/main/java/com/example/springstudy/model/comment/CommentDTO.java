@@ -1,6 +1,6 @@
-package com.example.springstudy.springstart.model.comment;
+package com.example.springstudy.model.comment;
 
-import com.example.springstudy.springstart.entity.memo.CommentEntity;
+import com.example.springstudy.entity.memo.CommentEntity;
 import lombok.Getter;
 import lombok.Setter;
 

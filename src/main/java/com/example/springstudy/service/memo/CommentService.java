@@ -1,8 +1,8 @@
-package com.example.springstudy.springstart.service.memo;
+package com.example.springstudy.service.memo;
 
-import com.example.springstudy.springstart.entity.memo.CommentEntity;
-import com.example.springstudy.springstart.model.comment.CommentDTO;
-import com.example.springstudy.springstart.repository.memo.CommentRepository;
+import com.example.springstudy.entity.memo.CommentEntity;
+import com.example.springstudy.model.comment.CommentDTO;
+import com.example.springstudy.repository.memo.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;

@@ -1,6 +1,6 @@
 package com.example.springstudy.controller.menu;
 
-import com.example.springstudy.entity.menu.;
+import com.example.springstudy.entity.menu.MenuEntity;
 import com.example.springstudy.model.menu.MenuDTO;
 import com.example.springstudy.service.menu.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +55,9 @@ public class MenuController {
 
     @PostMapping(value = "/detaildata")
     @ResponseBody
-    public MenuDTO readMenuById(@RequestBody MenuDTO menuDTO) {
-        MenuDTO menuItem = menuService.readMenuById(menuDTO.getMenuId());
-        return menuItem;
+    public void /*MenuDTO*/ readMenuById(@RequestBody MenuDTO menuDTO) {
+       // MenuDTO menuItem = menuService.readMenuById(menuDTO.getMenuId());
+        //return menuItem;
     }
 
     //#endregion

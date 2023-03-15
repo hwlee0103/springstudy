@@ -1,6 +1,6 @@
-package com.example.springstudy.springstart.repository.memo;
+package com.example.springstudy.repository.memo;
 
-import com.example.springstudy.springstart.entity.memo.MemoEntity;
+import com.example.springstudy.entity.memo.MemoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
